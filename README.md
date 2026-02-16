@@ -3,6 +3,7 @@
 **React Native** library to integrate **PagBank / PagSeguro Tap On** (NFC Tap-to-Pay) using the official Android extension.
 
 Accept contactless payments (credit, debit and installment) directly on Android devices that support NFC + the PagBank Tap On extension.
+<br>
 [![npm version](https://badge.fury.io/js/react-native-tapon-pagseguro.svg)](https://badge.fury.io/js/react-native-tapon-pagseguro) 
 [![Platform](https://img.shields.io/badge/platform-Android-yellow.svg)](https://www.android.com)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
