@@ -1,0 +1,17 @@
+{
+  "cxxNamespace": ["taponpagseguro"],
+  "ios": {
+    "iosModuleName": "TaponPagseguro"
+  },
+  "android": {
+    "androidNamespace": ["taponpagseguro"],
+    "androidCxxLibName": "taponpagseguro"
+  },
+  "autolinking": {
+    "TaponPagseguro": {
+      "swift": "TaponPagseguro",
+      "kotlin": "TaponPagseguro"
+    }
+  },
+  "ignorePaths": ["node_modules"]
+}
