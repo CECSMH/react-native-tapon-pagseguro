@@ -36,16 +36,27 @@
   "scripts": {
     "example": "yarn workspace react-native-tapon-pagseguro-example",
     "clean": "del-cli android/build example/android/build example/android/app/build example/ios/build lib",
-    "prepare": "bob build",
+    "prepublishOnly": "bob build",
     "nitrogen": "nitrogen",
     "typecheck": "tsc",
-    "test": "jest",
     "release": "release-it --only-version"
   },
   "keywords": [
     "react-native",
-    "ios",
-    "android"
+    "pagseguro",
+    "pagbank",
+    "tap-on",
+    "nfc",
+    "contactless payment",
+    "pagamento por aproximação",
+    "tap to pay",
+    "android nfc",
+    "pagbank tap on",
+    "estorno",
+    "refund",
+    "nitro-modules",
+    "brazil payments",
+    "pagamentos brasil"
   ],
   "repository": {
     "type": "git",
