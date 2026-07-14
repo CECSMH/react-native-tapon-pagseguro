@@ -50,7 +50,10 @@ data class PaymentResult(
   val raw_installment_value: Double,
   @DoNotStrip
   @Keep
-  val installment_method: InstallmentTypes
+  val installment_method: InstallmentTypes,
+  @DoNotStrip
+  @Keep
+  val is_sale_with_taxpass_through: Boolean
 ) {
   /* primary constructor */
 
@@ -68,6 +71,7 @@ data class PaymentResult(
       && Objects.deepEquals(this.installment_value, other.installment_value)
       && Objects.deepEquals(this.raw_installment_value, other.raw_installment_value)
       && Objects.deepEquals(this.installment_method, other.installment_method)
+      && Objects.deepEquals(this.is_sale_with_taxpass_through, other.is_sale_with_taxpass_through)
   }
 
   override fun hashCode(): Int {
@@ -82,7 +86,8 @@ data class PaymentResult(
       installments,
       installment_value,
       raw_installment_value,
-      installment_method
+      installment_method,
+      is_sale_with_taxpass_through
     ).contentDeepHashCode()
   }
 
@@ -94,8 +99,8 @@ data class PaymentResult(
     @Keep
     @Suppress("unused")
     @JvmStatic
-    private fun fromCpp(amount: Double, raw_amount: Double, payment_method: PaymentTypes, transaction_code: String, transaction_date_time: String, card_holder: String, card_brand: String, installments: Double, installment_value: Double, raw_installment_value: Double, installment_method: InstallmentTypes): PaymentResult {
-      return PaymentResult(amount, raw_amount, payment_method, transaction_code, transaction_date_time, card_holder, card_brand, installments, installment_value, raw_installment_value, installment_method)
+    private fun fromCpp(amount: Double, raw_amount: Double, payment_method: PaymentTypes, transaction_code: String, transaction_date_time: String, card_holder: String, card_brand: String, installments: Double, installment_value: Double, raw_installment_value: Double, installment_method: InstallmentTypes, is_sale_with_taxpass_through: Boolean): PaymentResult {
+      return PaymentResult(amount, raw_amount, payment_method, transaction_code, transaction_date_time, card_holder, card_brand, installments, installment_value, raw_installment_value, installment_method, is_sale_with_taxpass_through)
     }
   }
 }

@@ -57,6 +57,8 @@ namespace margelo::nitro::taponpagseguro {
       double raw_installment_value = this->getFieldValue(fieldRaw_installment_value);
       static const auto fieldInstallment_method = clazz->getField<JInstallmentTypes>("installment_method");
       jni::local_ref<JInstallmentTypes> installment_method = this->getFieldValue(fieldInstallment_method);
+      static const auto fieldIs_sale_with_taxpass_through = clazz->getField<jboolean>("is_sale_with_taxpass_through");
+      jboolean is_sale_with_taxpass_through = this->getFieldValue(fieldIs_sale_with_taxpass_through);
       return PaymentResult(
         amount,
         raw_amount,
@@ -68,7 +70,8 @@ namespace margelo::nitro::taponpagseguro {
         installments,
         installment_value,
         raw_installment_value,
-        installment_method->toCpp()
+        installment_method->toCpp(),
+        static_cast<bool>(is_sale_with_taxpass_through)
       );
     }
 
@@ -78,7 +81,7 @@ namespace margelo::nitro::taponpagseguro {
      */
     [[maybe_unused]]
     static jni::local_ref<JPaymentResult::javaobject> fromCpp(const PaymentResult& value) {
-      using JSignature = JPaymentResult(double, double, jni::alias_ref<JPaymentTypes>, jni::alias_ref<jni::JString>, jni::alias_ref<jni::JString>, jni::alias_ref<jni::JString>, jni::alias_ref<jni::JString>, double, double, double, jni::alias_ref<JInstallmentTypes>);
+      using JSignature = JPaymentResult(double, double, jni::alias_ref<JPaymentTypes>, jni::alias_ref<jni::JString>, jni::alias_ref<jni::JString>, jni::alias_ref<jni::JString>, jni::alias_ref<jni::JString>, double, double, double, jni::alias_ref<JInstallmentTypes>, jboolean);
       static const auto clazz = javaClassStatic();
       static const auto create = clazz->getStaticMethod<JSignature>("fromCpp");
       return create(
@@ -93,7 +96,8 @@ namespace margelo::nitro::taponpagseguro {
         value.installments,
         value.installment_value,
         value.raw_installment_value,
-        JInstallmentTypes::fromCpp(value.installment_method)
+        JInstallmentTypes::fromCpp(value.installment_method),
+        value.is_sale_with_taxpass_through
       );
     }
   };

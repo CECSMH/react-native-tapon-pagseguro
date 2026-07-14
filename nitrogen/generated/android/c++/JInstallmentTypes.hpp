@@ -51,6 +51,9 @@ namespace margelo::nitro::taponpagseguro {
         case InstallmentTypes::BUYER_INSTALLMENT:
           static const auto fieldBUYER_INSTALLMENT = clazz->getStaticField<JInstallmentTypes>("BUYER_INSTALLMENT");
           return clazz->getStaticFieldValue(fieldBUYER_INSTALLMENT);
+        case InstallmentTypes::BUYER_REPASS:
+          static const auto fieldBUYER_REPASS = clazz->getStaticField<JInstallmentTypes>("BUYER_REPASS");
+          return clazz->getStaticFieldValue(fieldBUYER_REPASS);
         default:
           std::string stringValue = std::to_string(static_cast<int>(value));
           throw std::invalid_argument("Invalid enum value (" + stringValue + "!");

@@ -13,7 +13,11 @@ export enum PaymentTypes {
     /**
      *  Pagamento realizado via cartão de crédito parcelado
      */
-    INSTALLMENT_CREDIT = 2
+    INSTALLMENT_CREDIT = 2,
+    /**
+     *  Pagemento realizado via cartão vale
+     */
+    VOUCHER = 3
 }
 
 /**
@@ -32,6 +36,10 @@ export enum InstallmentTypes {
      * Parcelamento realizado pelo comprador.
      */
     BUYER_INSTALLMENT = 2,
+    /**
+     * Parcelamento com repasse de taxas/juros configurado para o comprador.
+     */
+    BUYER_REPASS = 3
 }
 
 export type PaymentResult = {
@@ -45,5 +53,6 @@ export type PaymentResult = {
     installments: number
     installment_value: number
     raw_installment_value: number,
-    installment_method: InstallmentTypes
+    installment_method: InstallmentTypes,
+    is_sale_with_taxpass_through: boolean
 }

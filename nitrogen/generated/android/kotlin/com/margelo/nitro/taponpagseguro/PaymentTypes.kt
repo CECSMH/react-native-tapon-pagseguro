@@ -18,7 +18,8 @@ import com.facebook.proguard.annotations.DoNotStrip
 enum class PaymentTypes(@DoNotStrip @Keep val value: Int) {
   CREDIT(0),
   DEBIT(1),
-  INSTALLMENT_CREDIT(2);
+  INSTALLMENT_CREDIT(2),
+  VOUCHER(3);
 
   companion object
 }

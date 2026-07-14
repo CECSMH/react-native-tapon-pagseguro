@@ -27,6 +27,7 @@ namespace margelo::nitro::taponpagseguro {
     NO_INSTALLMENT      SWIFT_NAME(noInstallment) = 0,
     SELLER_INSTALLMENT      SWIFT_NAME(sellerInstallment) = 1,
     BUYER_INSTALLMENT      SWIFT_NAME(buyerInstallment) = 2,
+    BUYER_REPASS      SWIFT_NAME(buyerRepass) = 3,
   } CLOSED_ENUM;
 
 } // namespace margelo::nitro::taponpagseguro
@@ -56,7 +57,7 @@ namespace margelo::nitro {
         return false;
       }
       // Check if we are within the bounds of the enum.
-      return integer >= 0 && integer <= 2;
+      return integer >= 0 && integer <= 3;
     }
   };
 

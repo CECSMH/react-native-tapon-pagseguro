@@ -27,6 +27,7 @@ namespace margelo::nitro::taponpagseguro {
     CREDIT      SWIFT_NAME(credit) = 0,
     DEBIT      SWIFT_NAME(debit) = 1,
     INSTALLMENT_CREDIT      SWIFT_NAME(installmentCredit) = 2,
+    VOUCHER      SWIFT_NAME(voucher) = 3,
   } CLOSED_ENUM;
 
 } // namespace margelo::nitro::taponpagseguro
@@ -56,7 +57,7 @@ namespace margelo::nitro {
         return false;
       }
       // Check if we are within the bounds of the enum.
-      return integer >= 0 && integer <= 2;
+      return integer >= 0 && integer <= 3;
     }
   };
 

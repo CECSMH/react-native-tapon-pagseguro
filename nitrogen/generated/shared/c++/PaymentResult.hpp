@@ -55,10 +55,11 @@ namespace margelo::nitro::taponpagseguro {
     double installment_value     SWIFT_PRIVATE;
     double raw_installment_value     SWIFT_PRIVATE;
     InstallmentTypes installment_method     SWIFT_PRIVATE;
+    bool is_sale_with_taxpass_through     SWIFT_PRIVATE;
 
   public:
     PaymentResult() = default;
-    explicit PaymentResult(double amount, double raw_amount, PaymentTypes payment_method, std::string transaction_code, std::string transaction_date_time, std::string card_holder, std::string card_brand, double installments, double installment_value, double raw_installment_value, InstallmentTypes installment_method): amount(amount), raw_amount(raw_amount), payment_method(payment_method), transaction_code(transaction_code), transaction_date_time(transaction_date_time), card_holder(card_holder), card_brand(card_brand), installments(installments), installment_value(installment_value), raw_installment_value(raw_installment_value), installment_method(installment_method) {}
+    explicit PaymentResult(double amount, double raw_amount, PaymentTypes payment_method, std::string transaction_code, std::string transaction_date_time, std::string card_holder, std::string card_brand, double installments, double installment_value, double raw_installment_value, InstallmentTypes installment_method, bool is_sale_with_taxpass_through): amount(amount), raw_amount(raw_amount), payment_method(payment_method), transaction_code(transaction_code), transaction_date_time(transaction_date_time), card_holder(card_holder), card_brand(card_brand), installments(installments), installment_value(installment_value), raw_installment_value(raw_installment_value), installment_method(installment_method), is_sale_with_taxpass_through(is_sale_with_taxpass_through) {}
 
   public:
     friend bool operator==(const PaymentResult& lhs, const PaymentResult& rhs) = default;
@@ -84,7 +85,8 @@ namespace margelo::nitro {
         JSIConverter<double>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "installments"))),
         JSIConverter<double>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "installment_value"))),
         JSIConverter<double>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "raw_installment_value"))),
-        JSIConverter<margelo::nitro::taponpagseguro::InstallmentTypes>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "installment_method")))
+        JSIConverter<margelo::nitro::taponpagseguro::InstallmentTypes>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "installment_method"))),
+        JSIConverter<bool>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "is_sale_with_taxpass_through")))
       );
     }
     static inline jsi::Value toJSI(jsi::Runtime& runtime, const margelo::nitro::taponpagseguro::PaymentResult& arg) {
@@ -100,6 +102,7 @@ namespace margelo::nitro {
       obj.setProperty(runtime, PropNameIDCache::get(runtime, "installment_value"), JSIConverter<double>::toJSI(runtime, arg.installment_value));
       obj.setProperty(runtime, PropNameIDCache::get(runtime, "raw_installment_value"), JSIConverter<double>::toJSI(runtime, arg.raw_installment_value));
       obj.setProperty(runtime, PropNameIDCache::get(runtime, "installment_method"), JSIConverter<margelo::nitro::taponpagseguro::InstallmentTypes>::toJSI(runtime, arg.installment_method));
+      obj.setProperty(runtime, PropNameIDCache::get(runtime, "is_sale_with_taxpass_through"), JSIConverter<bool>::toJSI(runtime, arg.is_sale_with_taxpass_through));
       return obj;
     }
     static inline bool canConvert(jsi::Runtime& runtime, const jsi::Value& value) {
@@ -121,6 +124,7 @@ namespace margelo::nitro {
       if (!JSIConverter<double>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "installment_value")))) return false;
       if (!JSIConverter<double>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "raw_installment_value")))) return false;
       if (!JSIConverter<margelo::nitro::taponpagseguro::InstallmentTypes>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "installment_method")))) return false;
+      if (!JSIConverter<bool>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "is_sale_with_taxpass_through")))) return false;
       return true;
     }
   };

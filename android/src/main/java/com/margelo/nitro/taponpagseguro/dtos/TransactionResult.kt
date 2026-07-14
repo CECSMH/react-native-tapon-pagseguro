@@ -18,7 +18,8 @@ data class TransactionResult(
     val cardBrand: String?,
     val installments: Int?,
     val installmentValue: Double?,
-    val installmentMethod: String?
+    val installmentMethod: String?,
+    val isSaleWithTaxPassThrough: Boolean?
 ) : Parcelable {
 
     fun toJson(): String = Gson().toJson(this)
@@ -31,6 +32,7 @@ data class TransactionResult(
             "C" -> PaymentTypes.CREDIT
             "CP" -> PaymentTypes.INSTALLMENT_CREDIT
             "D" -> PaymentTypes.DEBIT
+            "V" -> PaymentTypes.VOUCHER
             else -> PaymentTypes.CREDIT
         },
         transaction_code = this.transactionCode ?: "",
@@ -44,9 +46,11 @@ data class TransactionResult(
             "PV" -> InstallmentTypes.SELLER_INSTALLMENT
             "PC" -> InstallmentTypes.BUYER_INSTALLMENT
             "AV" -> InstallmentTypes.NO_INSTALLMENT
+            "RC" -> InstallmentTypes.BUYER_REPASS
             else -> InstallmentTypes.NO_INSTALLMENT
             }
-        )
+        ),
+        is_sale_with_taxpass_through = this.isSaleWithTaxPassThrough ?: false
     }
     companion object {
         fun fromJson(json: String): TransactionResult = Gson().fromJson(json, TransactionResult::class.java)

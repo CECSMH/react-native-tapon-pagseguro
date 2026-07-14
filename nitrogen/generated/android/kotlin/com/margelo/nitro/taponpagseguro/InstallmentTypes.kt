@@ -18,7 +18,8 @@ import com.facebook.proguard.annotations.DoNotStrip
 enum class InstallmentTypes(@DoNotStrip @Keep val value: Int) {
   NO_INSTALLMENT(0),
   SELLER_INSTALLMENT(1),
-  BUYER_INSTALLMENT(2);
+  BUYER_INSTALLMENT(2),
+  BUYER_REPASS(3);
 
   companion object
 }

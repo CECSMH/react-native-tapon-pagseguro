@@ -11,7 +11,8 @@ data class TapOnPaymentData(
     val appVersion: String,
     val androidId: String,
     val saleAmount: Double,
-    val themeSettings: TapOnThemeConfigModel?
+    val themeSettings: TapOnThemeConfigModel?,
+    val enableTaxPassThrough: Boolean
 ) : Parcelable {
 
     fun toJson(): String = Gson().toJson(this)

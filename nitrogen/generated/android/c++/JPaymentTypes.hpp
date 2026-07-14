@@ -51,6 +51,9 @@ namespace margelo::nitro::taponpagseguro {
         case PaymentTypes::INSTALLMENT_CREDIT:
           static const auto fieldINSTALLMENT_CREDIT = clazz->getStaticField<JPaymentTypes>("INSTALLMENT_CREDIT");
           return clazz->getStaticFieldValue(fieldINSTALLMENT_CREDIT);
+        case PaymentTypes::VOUCHER:
+          static const auto fieldVOUCHER = clazz->getStaticField<JPaymentTypes>("VOUCHER");
+          return clazz->getStaticFieldValue(fieldVOUCHER);
         default:
           std::string stringValue = std::to_string(static_cast<int>(value));
           throw std::invalid_argument("Invalid enum value (" + stringValue + "!");
