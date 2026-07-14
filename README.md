@@ -6,7 +6,7 @@ Accept contactless payments (credit, debit and installment) directly on Android 
 <br>
 [![npm version](https://badge.fury.io/js/react-native-tapon-pagseguro.svg)](https://badge.fury.io/js/react-native-tapon-pagseguro) 
 [![Platform](https://img.shields.io/badge/platform-Android-yellow.svg)](https://www.android.com)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT) 
 
 ## Features
 
