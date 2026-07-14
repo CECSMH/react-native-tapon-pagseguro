@@ -40,12 +40,15 @@ namespace margelo::nitro::taponpagseguro {
       jni::local_ref<jni::JString> app_name = this->getFieldValue(fieldApp_name);
       static const auto fieldApp_version = clazz->getField<jni::JString>("app_version");
       jni::local_ref<jni::JString> app_version = this->getFieldValue(fieldApp_version);
+      static const auto fieldEnable_taxpass_through = clazz->getField<jni::JBoolean>("enable_taxpass_through");
+      jni::local_ref<jni::JBoolean> enable_taxpass_through = this->getFieldValue(fieldEnable_taxpass_through);
       static const auto fieldTheme = clazz->getField<JThemeSettings>("theme");
       jni::local_ref<JThemeSettings> theme = this->getFieldValue(fieldTheme);
       return SettingData(
         app_key->toStdString(),
         app_name->toStdString(),
         app_version->toStdString(),
+        enable_taxpass_through != nullptr ? std::make_optional(static_cast<bool>(enable_taxpass_through->value())) : std::nullopt,
         theme != nullptr ? std::make_optional(theme->toCpp()) : std::nullopt
       );
     }
@@ -56,7 +59,7 @@ namespace margelo::nitro::taponpagseguro {
      */
     [[maybe_unused]]
     static jni::local_ref<JSettingData::javaobject> fromCpp(const SettingData& value) {
-      using JSignature = JSettingData(jni::alias_ref<jni::JString>, jni::alias_ref<jni::JString>, jni::alias_ref<jni::JString>, jni::alias_ref<JThemeSettings>);
+      using JSignature = JSettingData(jni::alias_ref<jni::JString>, jni::alias_ref<jni::JString>, jni::alias_ref<jni::JString>, jni::alias_ref<jni::JBoolean>, jni::alias_ref<JThemeSettings>);
       static const auto clazz = javaClassStatic();
       static const auto create = clazz->getStaticMethod<JSignature>("fromCpp");
       return create(
@@ -64,6 +67,7 @@ namespace margelo::nitro::taponpagseguro {
         jni::make_jstring(value.app_key),
         jni::make_jstring(value.app_name),
         jni::make_jstring(value.app_version),
+        value.enable_taxpass_through.has_value() ? jni::JBoolean::valueOf(value.enable_taxpass_through.value()) : nullptr,
         value.theme.has_value() ? JThemeSettings::fromCpp(value.theme.value()) : nullptr
       );
     }

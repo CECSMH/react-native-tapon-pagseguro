@@ -15,7 +15,7 @@
     "TaponPagseguro": {
       "android": {
         "language": "kotlin",
-        "implementationClassName": "PosPagseguro"
+        "implementationClassName": "TaponPagseguro"
       }
     }
   },

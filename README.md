@@ -14,7 +14,7 @@ Accept contactless payments (credit, debit and installment) directly on Android 
 - Customizable theme (colors for toolbar, buttons, status bar…)
 - Check NFC support, NFC enabled status & extension compatibility
 - Redirect user to install Tap On extension from Play Store
-- Perform **contactless payments** (credit/debit/installments)
+- Perform **contactless payments** (credit/debit/installments/voucher)
 - Request full or partial **refunds** (estornos)
 
 **Currently supported only on Android** (via `react-native-nitro-modules`)
@@ -37,6 +37,7 @@ TapOn.initialize({
   app_key:    "your_app_key_from_pagbank",
   app_name:   "Your App Name",
   app_version:"1.2.3",
+  enable_taxpass_through: false // optional tax pass
   // optional theme
   theme: {
     toolbar_color: "#1E40AF",
@@ -70,7 +71,7 @@ try {
     transaction_code: result.transaction_code,
     card_brand:       result.card_brand,
     installments:     result.installments,
-    payment_method:   result.payment_method, // 0=credit, 1=debit, 2=installment
+    payment_method:   result.payment_method, // 0=credit, 1=debit, 2=installment, 3=voucher
   });
 } catch (e) {
   if (e instanceof PaymentError) {
@@ -106,6 +107,7 @@ type SettingData = {
   app_key:    string;
   app_name:   string;
   app_version:string;
+  enable_taxpass_through?: boolean;
   theme?:     ThemeSettings;
 };
 
@@ -118,29 +120,32 @@ type ThemeSettings = {
 };
 
 type PaymentResult = {
-  amount:                 number;           // in cents
-  raw_amount:             number;
-  payment_method:         PaymentTypes;     // 0=credit, 1=debit, 2=installment
-  transaction_code:       string;
-  transaction_date_time:  string;
-  card_holder:            string;
-  card_brand:             string;
-  installments:           number;
-  installment_value:      number;           // in cents
-  raw_installment_value:  number;
-  installment_method:     InstallmentTypes; // who absorbs the installment cost
+  amount:                       number;           // in cents
+  raw_amount:                   number;
+  payment_method:               PaymentTypes;     // 0=credit, 1=debit, 2=installment, 3=voucher
+  transaction_code:             string;
+  transaction_date_time:        string;
+  card_holder:                  string;
+  card_brand:                   string;
+  installments:                 number;
+  installment_value:            number;           // in cents
+  raw_installment_value:        number;
+  installment_method:           InstallmentTypes; // who absorbs the installment cost
+  is_sale_with_taxpass_through: boolean;
 };
 
 enum PaymentTypes {
   CREDIT            = 0,
   DEBIT             = 1,
   INSTALLMENT_CREDIT= 2,
+  VOUCHER           = 3
 }
 
 enum InstallmentTypes {
   NO_INSTALLMENT    = 0,
   SELLER_INSTALLMENT= 1,
   BUYER_INSTALLMENT = 2,
+  BUYER_REPASS      = 3
 }
 ```
 ## Requirements

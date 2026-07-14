@@ -48,9 +48,9 @@ data class TransactionResult(
             "AV" -> InstallmentTypes.NO_INSTALLMENT
             "RC" -> InstallmentTypes.BUYER_REPASS
             else -> InstallmentTypes.NO_INSTALLMENT
-            }
-        ),
+        },
         is_sale_with_taxpass_through = this.isSaleWithTaxPassThrough ?: false
+        )
     }
     companion object {
         fun fromJson(json: String): TransactionResult = Gson().fromJson(json, TransactionResult::class.java)

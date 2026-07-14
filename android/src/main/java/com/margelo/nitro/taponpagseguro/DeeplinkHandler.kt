@@ -75,6 +75,7 @@ class DeeplinkHandler(private val activity: AppCompatActivity) {
     private var app_key: String = ""
     private var app_name: String = ""
     private var app_version: String = ""
+    private var enable_taxpass_through: Boolean = false
     private var theme_settings: TapOnThemeConfigModel? = null
 
     private val package_name: String get() = PACKAGE_PRODUCTION
@@ -85,6 +86,7 @@ class DeeplinkHandler(private val activity: AppCompatActivity) {
         app_key = data.app_key
         app_name = data.app_name
         app_version = data.app_version
+        enable_taxpass_through = data.enable_taxpass_through ?: false
     }
 
     fun setTheme(data: TapOnThemeConfigModel): Unit { theme_settings = data; }
@@ -96,7 +98,8 @@ class DeeplinkHandler(private val activity: AppCompatActivity) {
             appVersion = app_version,
             androidId = android_id,
             saleAmount = amount / 100,
-            themeSettings = theme_settings
+            themeSettings = theme_settings,
+            enableTaxPassThrough = enable_taxpass_through
         )
         
         val intent = create_intent(ACTION_OPEN_APP, TapOnKeys.PAYMENT_DATA, payment_data.toJson())

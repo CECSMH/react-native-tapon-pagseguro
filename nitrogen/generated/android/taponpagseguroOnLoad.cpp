@@ -27,7 +27,7 @@ int initialize(JavaVM* vm) {
 }
 
 struct JHybridTaponPagseguroSpecImpl: public jni::JavaClass<JHybridTaponPagseguroSpecImpl, JHybridTaponPagseguroSpec::JavaPart> {
-  static constexpr auto kJavaDescriptor = "Lcom/margelo/nitro/taponpagseguro/PosPagseguro;";
+  static constexpr auto kJavaDescriptor = "Lcom/margelo/nitro/taponpagseguro/TaponPagseguro;";
   static std::shared_ptr<JHybridTaponPagseguroSpec> create() {
     static const auto constructorFn = javaClassStatic()->getConstructor<JHybridTaponPagseguroSpecImpl::javaobject()>();
     jni::local_ref<JHybridTaponPagseguroSpec::JavaPart> javaPart = javaClassStatic()->newObject(constructorFn);

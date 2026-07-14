@@ -29,6 +29,9 @@ data class SettingData(
   val app_version: String,
   @DoNotStrip
   @Keep
+  val enable_taxpass_through: Boolean?,
+  @DoNotStrip
+  @Keep
   val theme: ThemeSettings?
 ) {
   /* primary constructor */
@@ -39,6 +42,7 @@ data class SettingData(
     return Objects.deepEquals(this.app_key, other.app_key)
       && Objects.deepEquals(this.app_name, other.app_name)
       && Objects.deepEquals(this.app_version, other.app_version)
+      && Objects.deepEquals(this.enable_taxpass_through, other.enable_taxpass_through)
       && Objects.deepEquals(this.theme, other.theme)
   }
 
@@ -47,6 +51,7 @@ data class SettingData(
       app_key,
       app_name,
       app_version,
+      enable_taxpass_through,
       theme
     ).contentDeepHashCode()
   }
@@ -59,8 +64,8 @@ data class SettingData(
     @Keep
     @Suppress("unused")
     @JvmStatic
-    private fun fromCpp(app_key: String, app_name: String, app_version: String, theme: ThemeSettings?): SettingData {
-      return SettingData(app_key, app_name, app_version, theme)
+    private fun fromCpp(app_key: String, app_name: String, app_version: String, enable_taxpass_through: Boolean?, theme: ThemeSettings?): SettingData {
+      return SettingData(app_key, app_name, app_version, enable_taxpass_through, theme)
     }
   }
 }

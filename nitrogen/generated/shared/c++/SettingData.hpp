@@ -32,8 +32,8 @@
 namespace margelo::nitro::taponpagseguro { struct ThemeSettings; }
 
 #include <string>
-#include "ThemeSettings.hpp"
 #include <optional>
+#include "ThemeSettings.hpp"
 
 namespace margelo::nitro::taponpagseguro {
 
@@ -45,11 +45,12 @@ namespace margelo::nitro::taponpagseguro {
     std::string app_key     SWIFT_PRIVATE;
     std::string app_name     SWIFT_PRIVATE;
     std::string app_version     SWIFT_PRIVATE;
+    std::optional<bool> enable_taxpass_through     SWIFT_PRIVATE;
     std::optional<ThemeSettings> theme     SWIFT_PRIVATE;
 
   public:
     SettingData() = default;
-    explicit SettingData(std::string app_key, std::string app_name, std::string app_version, std::optional<ThemeSettings> theme): app_key(app_key), app_name(app_name), app_version(app_version), theme(theme) {}
+    explicit SettingData(std::string app_key, std::string app_name, std::string app_version, std::optional<bool> enable_taxpass_through, std::optional<ThemeSettings> theme): app_key(app_key), app_name(app_name), app_version(app_version), enable_taxpass_through(enable_taxpass_through), theme(theme) {}
 
   public:
     friend bool operator==(const SettingData& lhs, const SettingData& rhs) = default;
@@ -68,6 +69,7 @@ namespace margelo::nitro {
         JSIConverter<std::string>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "app_key"))),
         JSIConverter<std::string>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "app_name"))),
         JSIConverter<std::string>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "app_version"))),
+        JSIConverter<std::optional<bool>>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "enable_taxpass_through"))),
         JSIConverter<std::optional<margelo::nitro::taponpagseguro::ThemeSettings>>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "theme")))
       );
     }
@@ -76,6 +78,7 @@ namespace margelo::nitro {
       obj.setProperty(runtime, PropNameIDCache::get(runtime, "app_key"), JSIConverter<std::string>::toJSI(runtime, arg.app_key));
       obj.setProperty(runtime, PropNameIDCache::get(runtime, "app_name"), JSIConverter<std::string>::toJSI(runtime, arg.app_name));
       obj.setProperty(runtime, PropNameIDCache::get(runtime, "app_version"), JSIConverter<std::string>::toJSI(runtime, arg.app_version));
+      obj.setProperty(runtime, PropNameIDCache::get(runtime, "enable_taxpass_through"), JSIConverter<std::optional<bool>>::toJSI(runtime, arg.enable_taxpass_through));
       obj.setProperty(runtime, PropNameIDCache::get(runtime, "theme"), JSIConverter<std::optional<margelo::nitro::taponpagseguro::ThemeSettings>>::toJSI(runtime, arg.theme));
       return obj;
     }
@@ -90,6 +93,7 @@ namespace margelo::nitro {
       if (!JSIConverter<std::string>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "app_key")))) return false;
       if (!JSIConverter<std::string>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "app_name")))) return false;
       if (!JSIConverter<std::string>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "app_version")))) return false;
+      if (!JSIConverter<std::optional<bool>>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "enable_taxpass_through")))) return false;
       if (!JSIConverter<std::optional<margelo::nitro::taponpagseguro::ThemeSettings>>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "theme")))) return false;
       return true;
     }
